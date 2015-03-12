@@ -4,10 +4,13 @@ MAINTAINER Daniele Giglio <giglio.d@gmail.com>
 RUN apt-get update && apt-get -y install apache2
 RUN apt-get install -y git
 RUN cd /var/www/ && git clone https://github.com/Ntipa/jssip-demos.git
-RUN cd /var/www/ && /bin/ln -sf jssip-demos/tryit/index.html index.html
+#RUN cd /var/www/ && /bin/ln -sf jssip-demos/tryit/index.html index.html
+
 ENV APACHE_RUN_USER www-data
 ENV APACHE_RUN_GROUP www-data
 ENV APACHE_LOG_DIR /var/log/apache2
+COPY jssip-webphone.conf /etc/apache2/sites-available/
+RUN /bin/ln -sf /etc/apache2/sites-available/jssip-webphone.conf /etc/apache2/mods-enabled/
 
 RUN /bin/ln -sf ../sites-available/default-ssl /etc/apache2/sites-enabled/001-default-ssl
 RUN /bin/ln -sf ../mods-available/ssl.conf /etc/apache2/mods-enabled/

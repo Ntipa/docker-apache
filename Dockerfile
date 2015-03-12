@@ -1,7 +1,7 @@
 FROM debian:stable
 MAINTAINER Daniele Giglio <giglio.d@gmail.com>
 
-RUN apt-get update && apt-get -y install apache2 && apt-get clean
+RUN apt-get update && apt-get -y install apache2
 RUN apt-get install -y git
 RUN cd /var/www/html/ && git clone https://github.com/Ntipa/jssip-demos.git
 ENV APACHE_RUN_USER www-data
